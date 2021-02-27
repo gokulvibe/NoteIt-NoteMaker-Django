@@ -77,6 +77,14 @@ body {
     .login-card-footer-nav a {
       font-size: 14px;
       color: #919aa3; }
+
+      #ErrorMessage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        margin: auto 0;
+        }
   
   /*# sourceMappingURL=login.css.map */
   

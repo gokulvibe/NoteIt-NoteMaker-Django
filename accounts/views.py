@@ -13,7 +13,7 @@ def home(request):
         if request.method=="POST":
             email=request.POST["email"]
             password=request.POST["password"]
-            user=auth.authenticate(username=email,password=password)
+            user=auth.authenticate(email=email,password=password)
             
             if user is not None:
                 auth.login(request,user)
@@ -38,7 +38,7 @@ def register(request):
                 messages.info(request,'Account with the given email already exists, please try to login instead.')
                 return redirect('register')
             else:
-                user=User.objects.create_user(username=email,password=password,first_name=first_name,last_name=last_name)
+                user=User.objects.create_user(email=email,username=email,password=password,first_name=first_name,last_name=last_name)
                 user.save()
                 return redirect('/')
         else:

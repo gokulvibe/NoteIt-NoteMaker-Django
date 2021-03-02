@@ -41,6 +41,11 @@
                   <button type="submit" form="loginform" value="Submit" class="btn btn-block login-btn mb-4">Login</button>
                   
                 </form>
+                <div id="ErrorMessage">
+                  {% for message in messages %}
+                  <h3>{{message}}</h3>
+                  {% endfor %}
+               </div>
                 <a href="password_reset" class="forgot-password-link">Forgot password?</a><br><br>
                 <h5>OR</h5>
                 <div class="row">
@@ -56,11 +61,7 @@
             </div>
           </div>
         </div>
-        <div id="ErrorMessage">
-          {% for message in messages %}
-          <h1>{{message}}</h1>
-          {% endfor %}
-      </div>
+        
       </div>
     </div>
   </main>

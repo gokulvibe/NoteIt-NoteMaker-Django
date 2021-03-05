@@ -12,9 +12,9 @@ from django.core.mail import EmailMessage
 
 # Create your views here.
 
-def home(request):
+def login(request):
     if request.user.is_authenticated:
-        return render(request,"accounts/notes.html")
+        return redirect('/')
     
     else:
         if request.method=="POST":
@@ -35,9 +35,19 @@ def home(request):
                     messages.info(request,"Your account hasn't been activated yet. Please check your Email for the activation link.")
                 else:
                     messages.info(request,"Invalid Credentials")
-                return redirect('/')
+                return redirect('login')
         else:
             return render(request,'accounts/login.html')
+        
+        
+def index(request):
+    # if request.user.is_authenticated:
+    #     return render(request,"accounts/notes.html")
+        
+    # else:
+    #     return redirect('/login')
+    
+    return render(request,"accounts/notes.html")
         
 
 def register(request):
@@ -71,7 +81,7 @@ def register(request):
                 email.content_subtype = 'html'
                 email.send()
                 messages.info(request,'Verification Link has been sent to you given E-mail id, click the link to activate your account.')
-                return redirect('/')
+                return redirect('login')
         else:
             messages.info(request,'Passwords do not match')
             return redirect('register')
@@ -86,7 +96,7 @@ def notes(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return redirect('login')
 
 def activate(request, uidb64, token, backend='django.contrib.auth.backends.ModelBackend'):
     try:
@@ -102,3 +112,6 @@ def activate(request, uidb64, token, backend='django.contrib.auth.backends.Model
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+    
+    
+

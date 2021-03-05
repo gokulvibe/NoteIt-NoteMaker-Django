@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+    'mainnotes.apps.MainnotesConfig',
     
     ### For social login:
     'django.contrib.sites',
@@ -163,7 +164,7 @@ STATICFILES_DIRS=[
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''               #Email Here
+EMAIL_HOST_USER = 'gokulraamofficial@gmail.com'               #Email Here
 EMAIL_HOST_PASSWORD = ''           #Password Here
 EMAIL_PORT = 587
 
@@ -173,34 +174,34 @@ EMAIL_PORT = 587
 
 ####### For the PWA - for creating manifest.json ###################
 
-PWA_APP_NAME = 'NoteIt!'
-PWA_APP_DESCRIPTION = "NoteIt! PWA"
-PWA_APP_THEME_COLOR = '#000000'
-PWA_APP_BACKGROUND_COLOR = '#ffffff'
-PWA_APP_DISPLAY = 'standalone'
-PWA_APP_SCOPE = '/'
-PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/'
-PWA_APP_STATUS_BAR_COLOR = 'default'
-PWA_APP_ICONS = [
-    {
-        'src': 'static/images/logo.svg',
-        'sizes': '160x160'
-    }
-]
-PWA_APP_ICONS_APPLE = [
-    {
-        'src': 'static/images/logo.svg',
-        'sizes': '160x160'
-    }
-]
-PWA_APP_SPLASH_SCREEN = [
-    {
-        'src': 'static/images/notes3.png',
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
-    }
-]
-PWA_APP_DIR = 'ltr'
-PWA_APP_LANG = 'en-US'
+# PWA_APP_NAME = 'NoteIt!'
+# PWA_APP_DESCRIPTION = "NoteIt! PWA"
+# PWA_APP_THEME_COLOR = '#000000'
+# PWA_APP_BACKGROUND_COLOR = '#ffffff'
+# PWA_APP_DISPLAY = 'standalone'
+# PWA_APP_SCOPE = '/'
+# PWA_APP_ORIENTATION = 'any'
+# PWA_APP_START_URL = '/'
+# PWA_APP_STATUS_BAR_COLOR = 'default'
+# PWA_APP_ICONS = [
+#     {
+#         'src': 'static/images/logo.svg',
+#         'sizes': '160x160'
+#     }
+# ]
+# PWA_APP_ICONS_APPLE = [
+#     {
+#         'src': 'static/images/logo.svg',
+#         'sizes': '160x160'
+#     }
+# ]
+# PWA_APP_SPLASH_SCREEN = [
+#     {
+#         'src': 'static/images/notes3.png',
+#         'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+#     }
+# ]
+# PWA_APP_DIR = 'ltr'
+# PWA_APP_LANG = 'en-US'
 
 #######################################################################

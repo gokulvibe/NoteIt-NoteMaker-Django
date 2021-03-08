@@ -81,15 +81,15 @@
     </a>
 
       <div class="container m-5 p-3">
-        <form action="\addnote" method="POST" id="addnote">
+        <form action="addnote" id="addnote" method="POST">
           {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control m-1" id="title" placeholder="Title" name="title">
-          <textarea id="description" class="form-control m-1" rows="20" cols="100" placeholder="Your Valuable Notes..." name="description"></textarea>
+          <input type="text" class="form-control m-1" id="title" placeholder="Title" value="{{note.title}}">
+          <textarea id="description" class="form-control m-1" rows="20" cols="100" placeholder="Your Valuable Notes...">{{note.description}}</textarea>
           <div class="card login-card bg-secondary m-5 p-3">
             <div class="container">
               <div class="form-group">
-                <label><input type="checkbox" value="hide" id="hide_note" name="hide_note"><h3>Hide Note</h3></label>
+                <label><input type="checkbox" value="" id="hide_note"><h3>Hide Note</h3></label>
                </div>
               </div>
             </div>
@@ -97,9 +97,9 @@
         </form>
       </div>
 
-      <button type="submit" form="addnote" class="btn btn-success btn-lg m-5 p-3">Save</button>
-
-    
+    <button type="submit" form="addnote"  class="btn btn-success btn-lg m-5 p-3">
+      Save
+    </button>
 
 
 

@@ -3,12 +3,9 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('',views.index, name='home'),
     path('register/',views.register, name='register'),
-    path('notes',views.notes, name='notes'),
     path('logout',views.logout,name='logout'),
     path('login', views.login, name='login'),
-    #path('notes2', views.index, name='home'),
     
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     

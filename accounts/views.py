@@ -28,7 +28,7 @@ def login(request):
             
             if user is not None:
                 auth.login(request,user)
-                return redirect("notes")
+                return redirect('/')
             
             else:
                 if userObject is not None and userObject.is_active == False:
@@ -40,16 +40,7 @@ def login(request):
             return render(request,'accounts/login.html')
         
         
-def index(request):
-    # if request.user.is_authenticated:
-    #     return render(request,"accounts/notes.html")
         
-    # else:
-    #     return redirect('/login')
-    
-    return render(request,"accounts/notes.html")
-        
-
 def register(request):
     if request.method=='POST':
         first_name=request.POST["first_name"]
@@ -68,7 +59,7 @@ def register(request):
                 user.is_active = False
                 user.save()
                 current_site = get_current_site(request)
-                mail_subject = 'Activate your blog account.'
+                mail_subject = 'Activate your NoteIt! account.'
                 message = render_to_string('accounts/activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -90,9 +81,6 @@ def register(request):
         return render(request, 'accounts/register.html')
         
     
-    
-def notes(request):
-    return render(request, 'accounts/notes.html')
 
 def logout(request):
     auth.logout(request)

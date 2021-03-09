@@ -24,11 +24,21 @@ def addNote(request):
         else:
             hide_note = False
         
+        
         print("Printing Hide:", hide_note)
         note = Notes(owner=owner, title=title, description=description, hidden_note = hide_note)
         note.save()
         
-        return render(request, 'mainnotes/editnote.html', context={'note':note})
+        images = request.FILES.getlist('images')
+        print(images)
+        print(request.FILES)
+        for image in images:
+            print("Entered")
+            note_image = Image.objects.create(note=note,image=image)
+            note_image.save()
+        
+        images_for_html = Image.objects.filter(note=note)
+        return render(request, 'mainnotes/editnote.html', context={'note':note, 'images':images_for_html})
     
     else:
         return render(request, "mainnotes/addnote.html")

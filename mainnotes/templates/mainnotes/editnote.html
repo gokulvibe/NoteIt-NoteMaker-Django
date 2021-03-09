@@ -93,6 +93,14 @@
                </div>
               </div>
             </div>
+            <div class="custom-file">
+              <input type="file" id="images" name="images" accept="image/*" class="custom-file-input" multiple>
+              <label class="custom-file-label" for="customFile">Add images to your note</label>
+            </div>
+              <div class="gallery"></div>
+              {% for image in images %}
+              <img src="{{image.image.url}}">
+              {% endfor %}
           </div>
         </form>
       </div>

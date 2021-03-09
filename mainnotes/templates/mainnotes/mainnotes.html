@@ -79,9 +79,10 @@
       <span class="glyphicon glyphicon-plus"></span> Create Note
     </a>
 
+    <!-- <div class="card-deck"> -->
       {% for note in all_notes %}
       {% if not note.hidden_note and not note.trashed_note%}
-      <div class="card login-card m-5 p-3">
+      <div class="card login-card m-5 p-3 col-lg-4">
         <div class="container">
               <h4 class="card-title">{{note.title}}</h4>
               <p class="card-text">{{note.excerpt}}</p><br>
@@ -91,6 +92,7 @@
       </div>
       {%endif%}
       {%endfor%}
+    <!-- </div> -->
 
 
   </main>

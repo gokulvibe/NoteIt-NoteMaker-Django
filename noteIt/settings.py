@@ -165,7 +165,7 @@ STATICFILES_DIRS=[
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'gokulraamofficial@gmail.com'               #Email Here
-EMAIL_HOST_PASSWORD = ''           #Password Here
+EMAIL_HOST_PASSWORD = 'Whut!? U want password?'           #Password Here
 EMAIL_PORT = 587
 
 

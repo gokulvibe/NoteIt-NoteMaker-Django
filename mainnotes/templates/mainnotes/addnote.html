@@ -1,82 +1,6 @@
-{% load static %}
-{% load socialaccount %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Create New Note - NoteIt!</title>
-  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/register.css' %}">
-  <link rel="stylesheet" href="{% static 'css/login.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/customized.css' %}">
-  
+{%extends 'mainnotes/base.html'%}
 
-</head>
-<body>
-
-  <!-- Navbar -->
-  <nav class="customnavbar navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">NoteIt!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/">All Notes<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/addnote">Create new note</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Hidden Notes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Trashed Notes</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Export All Notes
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Export to Google Sheets</a>
-            <a class="dropdown-item" href="#">Export as CSV</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="collapse navbar-collapse d-flex justify-content-center align-items-left" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            
-                {% if user.is_authenticated%}
-                <li class="nav-item active">
-                  <p class="nav-link">Hello, {{user.first_name}} <span class="sr-only">(current)</span></p>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/register">Register</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
-                </li>
-                <!-- <h1>You have to be logged in to view your notes</h1> -->
-                {% endif %}
-        </ul>
-    </div>
-    
-  </nav>
-
-  <!------------------------------>
-
-  <!-- Notes -->
+{% block content%}
   <a href="/" class="custombutton btn btn-info btn-lg">
     <span class="glyphicon glyphicon-plus"></span> Back to all notes
   </a>
@@ -111,20 +35,6 @@
         </form>
       </div>
 
-      <!-- <div class="card login-card m-5 p-3">
-        <div class="container">
-          <a href="#"><span class="material-icons">
-            delete
-            </span>
-          </a>
-        </div>
-      </div> -->
   </main>
   
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="{% static 'js/imageview.js' %}"></script>
-</body>
-</html>
+  {% endblock content%}

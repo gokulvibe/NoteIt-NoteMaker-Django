@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google', 
     
+    #Encryption
+    'encrypted_fields',
+    
     # 'pwa',
 ]
 
@@ -136,7 +139,7 @@ AUTHENTICATION_BACKENDS = (
  )
 
 SITE_ID = 3
-LOGIN_REDIRECT_URL = 'notes'
+LOGIN_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -169,6 +172,10 @@ EMAIL_HOST_PASSWORD = 'Whut!? U want password?'           #Password Here
 EMAIL_PORT = 587
 
 
+#For the Encryption
+FIELD_ENCRYPTION_KEYS = [
+    "f164ec6bd6fbc4aef5647abc15199da0f9badcc1d2127bde2087ae0d794a9a0b"
+]
 
 
 

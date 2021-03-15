@@ -1,0 +1,27 @@
+{%extends 'mainnotes/base.html'%}
+
+{% block content%}
+
+<div id="ErrorMessage">
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+ </div>
+
+<main class="d-flex align-items-center min-vh-60 py-3 py-md-0">
+    <div class="container m-5 p-3">
+        <form action="\hiddennotes" method="POST" id="hiddenpasscodelogin">
+          {% csrf_token %}
+          <div class="form-group">
+            <div class="form-group mb-4">
+                <label for="passcode" class="sr-only">Password</label>
+                <input type="password" name="passcode" id="passcode" class="form-control" placeholder="***********">
+              </div>
+              <button type="submit" form="hiddenpasscodelogin" value="Submit" class="btn btn-block login-btn mb-4">Enter hidden notes</button>
+          </div>
+        </form>
+    </div>
+
+</main>
+  
+{% endblock content%}

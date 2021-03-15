@@ -108,19 +108,33 @@ def hidenote(request, pk):
 def hidden_notes(request):
     if HiddenNotePassword.objects.filter(user=request.user).exists():
         if request.method == 'POST':
-            passcode = request.POST['password']
+            passcode = request.POST['passcode']
             if HiddenNotePassword.objects.get(user=request.user).hidden_note_password == passcode:
                 allNotes = Notes.objects.filter(owner = request.user, hidden_note = True, trashed_note = False)
                 return render(request, 'mainnotes/hiddennotes.html', context = {'all_notes': allNotes})
             else:
                 messages.info(request, 'Invalid passcode for hidden notes')
-                return redirect('enterpass')
+                return redirect('hiddennotes')
             
         else:
             return render(request, 'mainnotes/enterhiddenpass.html')
         
     else:
-        return render(request, 'mainnotes/createhiddenpass.html')
+        if request.method == 'POST':
+            passcode = request.POST['passcode']
+            passcode2 = request.POST['passcode2']
+            if passcode == passcode2:
+                user = request.user
+                hiddenpasscode = HiddenNotePassword(user=user, hidden_note_password = passcode)
+                hiddenpasscode.save()
+                messages.info(request, 'Created new hidden passcode. You can view your hidden notes using it.')
+            else:
+                messages.info(request, 'The passcodes do not match!')
+            
+            return redirect('hiddennotes')
+            
+        else:
+            return render(request, 'mainnotes/createhiddenpass.html')
 
 def trashed_notes(request):
     allNotes = Notes.objects.filter(owner = request.user, trashed_note = True)

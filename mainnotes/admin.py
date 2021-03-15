@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Notes, Image
+from .models import *
 # Register your models here.
 admin.site.register(Notes)
 admin.site.register(Image)
+admin.site.register(HiddenNotePassword)

@@ -23,3 +23,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     # path('', include('pwa.urls')),
 ]
+
+
+admin.autodiscover()
+admin.site.enable_nav_sidebar = False

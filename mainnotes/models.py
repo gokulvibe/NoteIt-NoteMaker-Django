@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from encrypted_fields import fields
 
 # Create your models here.
 
@@ -22,3 +22,7 @@ class Notes(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to='notesImages/')
     note = models.ForeignKey(Notes, on_delete=models.CASCADE)
+    
+class HiddenNotePassword(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    hidden_note_password = fields.EncryptedCharField(max_length=50)

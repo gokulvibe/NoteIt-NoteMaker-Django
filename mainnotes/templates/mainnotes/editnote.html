@@ -2,20 +2,46 @@
   {% block content %}
 
   <!-- Notes -->
+  {% if note.hidden_note %}
+  <a href="/hiddennotes" class="custombutton btn btn-primary btn-lg mr-5 mb-5">
+    <span class="glyphicon glyphicon-plus"></span> Back to hidden notes
+  </a> <br>
+  {% else %}
   <a href="/" class="custombutton btn btn-info btn-lg mr-5 mb-5">
     <span class="glyphicon glyphicon-plus"></span> Back to all notes
   </a> <br>
+  {% endif %}
+
+
+
+
   <a href="/trashnote/{{note.pk}}/" class="custombutton btn btn-danger btn-lg">
     <span class="material-icons">delete</span> Trash this note
   </a>
+
+
+
+  {% if note.hidden_note %}
+  <a href="/hidenote/{{note.pk}}/" class="custombutton btn btn-primary active btn-lg">
+    <span class="material-icons">hide_source</span> UnHide this note
+  </a>
+  {% else %}
   <a href="/hidenote/{{note.pk}}/" class="custombutton btn btn-primary btn-lg">
     <span class="material-icons">hide_source</span> Hide this note
   </a>
+  {% endif %}
   <button type="submit" form="editnote"  class="btn btn-success btn-lg custombutton"><span class="material-icons">
     done_outline
     </span>
     Save
   </button>
+
+  <div id="ErrorMessage">
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+ </div>
+
   <main class="d-flex align-items-center min-vh-60 py-3 py-md-0">
 
       <div class="container m-5 p-3">

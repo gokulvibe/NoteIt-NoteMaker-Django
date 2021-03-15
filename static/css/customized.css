@@ -36,3 +36,11 @@
 .customfooterbuttons{
     display: inline-flex;
 }
+
+.custompara{
+    text-align: center;
+}
+
+.custombutton2{
+    justify-content: center;
+}

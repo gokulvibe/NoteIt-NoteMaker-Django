@@ -1,8 +1,8 @@
 {%extends 'mainnotes/base.html'%}
 
 {% block content%}
-  <a href="/" class="custombutton btn btn-info btn-lg">
-    <span class="glyphicon glyphicon-plus"></span> Back to all notes
+  <a href="/hiddennotes" class="custombutton btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-plus"></span> Back to all hidden notes
   </a>
 
     <button type="submit" form="addnote" class="custombutton btn btn-success btn-lg m-2 p-2">Save</button>
@@ -10,9 +10,11 @@
 
   
   <main class="d-flex align-items-center min-vh-60 py-3 py-md-0">
-  
+
+    
+
       <div class="container m-5 p-3">
-        <form action="\addnote" method="POST" id="addnote" enctype="multipart/form-data">
+        <form action="\addhiddennote" method="POST" id="addhiddennote" enctype="multipart/form-data">
           {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control m-1" id="title" placeholder="Title" name="title">
@@ -24,7 +26,7 @@
             <div class="gallery"></div>
 
           <div id="customfooterbuttons">
-            <button type="submit" form="addnote" class="custombutton btn btn-success btn-lg m-2 p-2">Save</button>
+            <button type="submit" form="addhiddennote" class="custombutton btn btn-success btn-lg m-2 p-2">Save</button>
 
           </div>
 

@@ -17,17 +17,9 @@ def addNote(request):
     if request.method == "POST":
         title = request.POST['title']
         description = request.POST['description']
-        print("Printing title:",title)
         owner = request.user
         
-        if 'hide_note' in request.POST:
-            hide_note = True
-        else:
-            hide_note = False
-        
-        
-        print("Printing Hide:", hide_note)
-        note = Notes(owner=owner, title=title, description=description, hidden_note = hide_note)
+        note = Notes(owner=owner, title=title, description=description)
         note.save()
         
         images = request.FILES.getlist('images')
@@ -87,6 +79,13 @@ def trashnote(request, pk):
         note.save()
         messages.info(request,"Note Restored Successfully")
         return redirect('/trashednotes')
+    
+@login_required(redirect_field_name='login')
+def trashed_notes(request):
+    allNotes = Notes.objects.filter(owner = request.user, trashed_note = True)
+    return render(request, 'mainnotes/trashednotes.html', context = {'all_notes': allNotes})
+
+
 
 @login_required(redirect_field_name='login')
 def hidenote(request, pk):
@@ -95,13 +94,13 @@ def hidenote(request, pk):
         note.hidden_note = True
         note.save()
         messages.info(request,"Note Hided Successfully")
-        return redirect('/')
+        return redirect('/editnote/'+str(note.pk))
     
     else:
         note.hidden_note = False
         note.save()
         messages.info(request,"Note Unhided Successfully")
-        return redirect('/hiddennotes')
+        return redirect('/editnote/'+str(note.pk))
     
 
 @login_required(redirect_field_name='login')
@@ -136,9 +135,28 @@ def hidden_notes(request):
         else:
             return render(request, 'mainnotes/createhiddenpass.html')
 
-def trashed_notes(request):
-    allNotes = Notes.objects.filter(owner = request.user, trashed_note = True)
-    return render(request, 'mainnotes/trashednotes.html', context = {'all_notes': allNotes})
 
-
+@login_required(redirect_field_name='login')
+def addHiddenNote(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        owner = request.user
+        
+        note = Notes(owner=owner, title=title, description=description, hidden_note=True)
+        note.save()
+        
+        images = request.FILES.getlist('images')
+        print(images)
+        print(request.FILES)
+        for image in images:
+            print("Entered")
+            note_image = Image.objects.create(note=note,image=image)
+            note_image.save()
+        
+        images_for_html = Image.objects.filter(note=note)
+        return redirect('/editnote/'+str(note.pk))
+    
+    else:
+        return render(request, "mainnotes/addhiddennote.html")
     

@@ -8,9 +8,12 @@
     <h3>{{message}}</h3>
     {% endfor %}
  </div>
-
+ 
 <main class="d-flex align-items-center min-vh-60 py-3 py-md-0">
     <div class="container m-5 p-3">
+        <p class="login-card-description custompara">You have to create a new passcode for your hidden notes.<br>
+            You can then use this passcode to view your hidden notes.
+        </p>
         <form action="\hiddennotes" method="POST" id="hiddenpasscode">
           {% csrf_token %}
           <div class="form-group">
@@ -22,7 +25,7 @@
                 <label for="passcode2" class="sr-only">Confirm Password</label>
                 <input type="password" name="passcode2" id="passcode2" class="form-control" placeholder="***********">
               </div>
-              <button type="submit" form="hiddenpasscode" value="Submit" class="btn btn-block login-btn mb-4">Create hidden note passcode</button>
+              <button type="submit" form="hiddenpasscode" value="Submit" class="btn btn-primary btn-block login-btn mb-4">Create hidden note passcode</button>
           </div>
         </form>
     </div>

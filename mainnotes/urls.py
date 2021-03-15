@@ -10,4 +10,5 @@ urlpatterns = [
     path('hiddennotes', views.hidden_notes, name='hiddennotes'),
     path('trashednotes', views.trashed_notes, name='trashdnotes'),
     path('emptytrash', views.empty_trash, name='empty_trash'),
+    path('addhiddennote', views.addHiddenNote, name='addhiddennote'),
 ]

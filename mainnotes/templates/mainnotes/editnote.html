@@ -32,6 +32,9 @@
           <a class="nav-link" href="/">All Notes<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/addnote">Create new note</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#">Hidden Notes</a>
         </li>
         <li class="nav-item">
@@ -75,22 +78,32 @@
   <!------------------------------>
 
   <!-- Notes -->
+  <a href="/" class="custombutton btn btn-info btn-lg mr-5 mb-5">
+    <span class="glyphicon glyphicon-plus"></span> Back to all notes
+  </a> <br>
+  <a href="/trashnote/{{note.pk}}/" class="custombutton btn btn-danger btn-lg">
+    <span class="material-icons">delete</span> Trash this note
+  </a>
+  <a href="/hidenote/{{note.pk}}/" class="custombutton btn btn-primary btn-lg">
+    <span class="material-icons">hide_source</span> Hide this note
+  </a>
+  <button type="submit" form="editnote"  class="btn btn-success btn-lg custombutton"><span class="material-icons">
+    done_outline
+    </span>
+    Save
+  </button>
   <main class="d-flex align-items-center min-vh-60 py-3 py-md-0">
 
-    <a href="/" class="btn btn-info btn-lg m-5 p-3">
-      <span class="glyphicon glyphicon-plus"></span> Back to all notes
-    </a>
-
       <div class="container m-5 p-3">
-        <form action="addnote" id="addnote" method="POST">
+        <form action="/editnote/{{note.pk}}/" id="editnote" method="POST">
           {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control m-1" id="title" placeholder="Title" value="{{note.title}}">
-          <textarea id="description" class="form-control m-1" rows="20" cols="100" placeholder="Your Valuable Notes...">{{note.description}}</textarea>
+          <input type="text" class="form-control m-1" id="title" name="title" placeholder="Title" value="{{note.title}}">
+          <textarea id="description" class="form-control m-1" name="description" rows="20" cols="100" placeholder="Your Valuable Notes...">{{note.description}}</textarea>
           <div class="card login-card bg-secondary m-5 p-3">
             <div class="container">
               <div class="form-group">
-                <label><input type="checkbox" value="" id="hide_note"><h3>Hide Note</h3></label>
+                <label><input type="checkbox" value="" id="hide_note" name="hide_note"><h3>Hide Note</h3></label>
                </div>
               </div>
             </div>
@@ -106,9 +119,13 @@
         </form>
       </div>
 
-    <button type="submit" form="addnote"  class="btn btn-success btn-lg m-5 p-3">
+    <button type="submit" form="editnote"  class="btn btn-success btn-lg m-5 p-3">
       Save
     </button>
+
+    <span class="material-icons">
+      delete
+      </span>
 
 
 
@@ -126,5 +143,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="{% static 'js/imageview.js' %}"></script>
 </body>
 </html>

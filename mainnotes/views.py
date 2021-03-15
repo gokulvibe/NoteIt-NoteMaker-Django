@@ -38,7 +38,30 @@ def addNote(request):
             note_image.save()
         
         images_for_html = Image.objects.filter(note=note)
-        return render(request, 'mainnotes/editnote.html', context={'note':note, 'images':images_for_html})
+        return redirect('/editnote/'+str(note.pk))
     
     else:
         return render(request, "mainnotes/addnote.html")
+    
+def editnote(request, pk):
+    if request.method == 'POST':
+        title = request.POST['title']
+        print("Printing title:", title)
+        description = request.POST['description']
+        if 'hide_note' in request.POST:
+            hide_note = True
+        else:
+            hide_note = False
+            
+        note = Notes.objects.get(pk=pk)
+        note.title = title
+        note.description = description
+        note.hidden_note = hide_note
+        note.save()
+        
+        return redirect('/editnote/'+str(note.pk))
+    
+    else:
+        note = Notes.objects.get(pk = pk)
+        images = Image.objects.filter(note = note)
+        return render(request, 'mainnotes/editnote.html', context={'note':note, 'images':images})

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'mainnotes.apps.MainnotesConfig',
+    'friends.apps.FriendsConfig',
     
     ### For social login:
     'django.contrib.sites',

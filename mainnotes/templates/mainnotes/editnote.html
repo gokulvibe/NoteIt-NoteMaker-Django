@@ -15,9 +15,15 @@
 
 
 
-  <a href="/trashnote/{{note.pk}}/" class="custombutton btn btn-danger btn-lg">
-    <span class="material-icons">delete</span> Trash this note
+  {% if note.trashed_note %}
+  <a href="/hidenote/{{note.pk}}/" class="custombutton btn btn-danger btn-lg">
+    <span class="material-icons">delete</span> Delete this permanently
   </a>
+  {% else %}
+  <a href="/trashnote/{{note.pk}}/" class="custombutton btn btn-danger btn-lg">
+    <span class="material-icons">delete_outline</span> Trash this note
+  </a>
+  {% endif %}
 
 
 
@@ -30,11 +36,18 @@
     <span class="material-icons">hide_source</span> Hide this note
   </a>
   {% endif %}
+
+  {% if note.trashed_note %}
+  <a href="/trashnote/{{note.pk}}/" class="custombutton btn btn-success btn-lg">
+    <span class="material-icons">done</span> Restore this note
+  </a>
+  {% else %}
   <button type="submit" form="editnote"  class="btn btn-success btn-lg custombutton"><span class="material-icons">
     done_outline
     </span>
     Save
   </button>
+  {% endif %}
 
   <div id="ErrorMessage">
     {% for message in messages %}

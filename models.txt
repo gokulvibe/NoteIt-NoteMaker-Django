@@ -1,9 +1,14 @@
 class Friend(models.Model):
     user = models.ForeignKey(User)
     userFriend = models.ForeignKey(User)
-    request_pending = BooleanField
+    request_accepted = BooleanField
     
 class SharedNotes(models.Model):
     owner = UserField
     shared_to = UserField
     note_shared = Note
+
+def notification(models.Model):
+    owner = UserField
+    message = CharField
+    opened = BooleanField

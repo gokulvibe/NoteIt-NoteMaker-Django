@@ -39,8 +39,16 @@
 
 .custompara{
     text-align: center;
+    margin-top: 50px;
 }
 
 .custombutton2{
     justify-content: center;
+}
+
+.customfriendslist{
+    max-width: max-content;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
 }

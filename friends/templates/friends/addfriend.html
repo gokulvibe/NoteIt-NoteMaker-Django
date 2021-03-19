@@ -1,0 +1,38 @@
+{% extends "mainnotes/base.html" %}
+
+{% block content %}
+
+<main class="align-items-center">
+    
+    <div class="container m-auto">
+        <p class="login-card-description custompara">Search a friend using their E-mail ID</p>
+        <form action="\addfriend" method="GET" id="hiddenpasscodelogin">
+          <div class="form-group">
+            <div class="form-group mb-4">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+              </div>
+              <button type="submit" form="hiddenpasscodelogin" value="Submit" class="btn btn-primary btn-block login-btn mb-4">Search</button>
+          </div>
+        </form>
+    </div>
+
+    <div class="customfriendslist">
+        <ul class="list-group">
+            {%for user in user_results%}
+            <li class="list-group-item">{{user.first_name}} {{user.last_name}} | 
+                <span class="badge">{{user.email}}</span> | 
+                <form action="/addfriend" id="addfriend" method="POST">
+                    <input type="hidden" id="addfriend" name="friend" value="{{user.pk}}">
+                    <input type="submit" class="custombutton btn btn-primary btn-sm" value="Add Friend">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</main>
+
+
+
+{% endblock content %}

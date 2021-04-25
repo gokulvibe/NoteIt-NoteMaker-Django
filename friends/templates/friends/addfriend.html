@@ -19,14 +19,28 @@
 
     <div class="customfriendslist">
         <ul class="list-group">
-            {%for user in user_results%}
+            {%for user in all_users_searched%}
+            {% if user != request.user %}
             <li class="list-group-item">{{user.first_name}} {{user.last_name}} | 
                 <span class="badge">{{user.email}}</span> | 
+
+                {% if user not in request.user.friends.all %}
+                <form action="/addfriend" id="addfriend" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="addfriend" name="friend" value="{{user.pk}}">
+                
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add Friend">
+                </form>
+
+                {% else %}
                 <form action="/addfriend" id="addfriend" method="POST">
                     <input type="hidden" id="addfriend" name="friend" value="{{user.pk}}">
-                    <input type="submit" class="custombutton btn btn-primary btn-sm" value="Add Friend">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Remove Friend">
                 </form>
+                {% endif %}
+                
             </li>
+            {% endif %}
             {% endfor %}
         </ul>
     </div>

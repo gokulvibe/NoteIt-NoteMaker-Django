@@ -1,11 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
 from encrypted_fields import fields
-
+from django.conf import settings
 # Create your models here.
 
 class Notes(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
@@ -24,5 +23,5 @@ class Image(models.Model):
     note = models.ForeignKey(Notes, on_delete=models.CASCADE)
     
 class HiddenNotePassword(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     hidden_note_password = fields.EncryptedCharField(max_length=50)

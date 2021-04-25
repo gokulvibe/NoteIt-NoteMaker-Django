@@ -26,5 +26,5 @@ urlpatterns = [
 ]
 
 
-admin.autodiscover()
-admin.site.enable_nav_sidebar = False
+# admin.autodiscover()
+# admin.site.enable_nav_sidebar = False

@@ -1,23 +1,33 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
-from .models import Friend, Notification
+from django.shortcuts import render, redirect
+# from django.contrib.auth.models import User
+from .models import FriendRequest, User
+from django.contrib import messages
 # Create your views here.
-
-def addfriend(request):
-    if request.method=="POST":
-        friend_id = request.POST['friend']
-        friend = User.objects.get(pk = friend_id)
-        friend_object = Friend(user=request.user, userFriend = friend)
-        friend_object.save()
-    try:
-        searchable = request.GET['search']
-    except:
-        searchable = ''
+    
+    
+def send_friend_request(request):
+    if request.method == 'POST':
+        from_user = request.user
+        to_user = User.objects.get(pk = request.POST['friend'])
+        friend_request, created = FriendRequest.objects.get_or_create(from_user = from_user, to_user = to_user)
         
-    user_results = User.objects.filter(email__contains = searchable)
-    
-    return render(request, 'friends/addfriend.html', context={'user_results': user_results})
-
-def viewfriends(request):
-    pass
-    
+        if created:
+            messages.info(request, 'Request has been sent')
+            return redirect('/addfriend')
+        
+        else:
+            messages.info(request, 'Request has been already sent')
+            return redirect('/addfriend')
+        
+    else:
+        try:
+            searchable = request.GET['search']
+        except:
+            searchable = ''
+            
+        all_users_searched = User.objects.filter(email__contains = searchable).exclude(pk=request.user.pk)
+        friends = request.user.friends
+        
+        return render(request, 'friends/addfriend.html',
+                      context={'all_users_searched' : all_users_searched, 'friends' : friends})
+        

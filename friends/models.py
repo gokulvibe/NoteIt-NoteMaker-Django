@@ -1,14 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class Friend(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
-    userFriend = models.ForeignKey(User, on_delete=models.CASCADE, name="userfriend")
-    request_accepted = models.BooleanField(default=False)
+class User(AbstractUser):
+    friends = models.ManyToManyField("User", blank=True)
+
+
     
-class Notification(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    opened = models.BooleanField(default=True)
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)

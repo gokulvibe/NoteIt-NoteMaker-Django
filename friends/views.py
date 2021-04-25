@@ -31,3 +31,9 @@ def send_friend_request(request):
         return render(request, 'friends/addfriend.html',
                       context={'all_users_searched' : all_users_searched, 'friends' : friends})
         
+        
+def display_friend_requests(request):
+    friend_requests = FriendRequest.objects.filter(to_user = request.user)
+    
+    return render(request, 'friends/friend_requests.html', context = {'friend_requests' : friend_requests})
+        

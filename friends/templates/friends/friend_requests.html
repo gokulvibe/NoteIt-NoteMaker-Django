@@ -1,0 +1,33 @@
+{% extends "mainnotes/base.html" %}
+
+{% block content %}
+
+<main class="align-items-center">
+    <div class="customfriendslist">
+        <ul class="list-group">
+            {% for friend in friend_requests %}
+
+            <li class="list-group-item">{{friend.from_user.first_name}} {{friend.from_user.last_name}} | 
+                <span class="badge">{{friend.from_user.email}}</span> | 
+
+
+                <form action="/acceptrequest" id="acceptrequest" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="friend" value="{{friend.pk}}">
+                
+                    <input type="submit" class="btn btn-primary btn-sm" value="Accept Request">
+                </form>
+
+                <form action="/deleterequest" id="deleterequest" method="POST">
+                    <input type="hidden" name="friend" value="{{friend.pk}}">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Delete Request">
+                </form>
+
+                
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+
+{% endblock content %}

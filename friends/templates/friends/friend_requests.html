@@ -3,6 +3,13 @@
 {% block content %}
 
 <main class="align-items-center">
+
+    <div id="ErrorMessage">
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+     </div>
+     
     <div class="customfriendslist">
         <ul class="list-group">
             {% for friend in friend_requests %}

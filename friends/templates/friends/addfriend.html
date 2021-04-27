@@ -4,6 +4,12 @@
 
 <main class="align-items-center">
     
+    <div id="ErrorMessage">
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+     </div>
+
     <div class="container m-auto">
         <p class="login-card-description custompara">Search a friend using their E-mail ID</p>
         <form action="\addfriend" method="GET" id="hiddenpasscodelogin">

@@ -52,3 +52,16 @@ def accept_request(request):
     
     else:
         return HttpResponse("Something's fishy bruh!")
+    
+    
+def remove_friend(request):
+    if request.method == 'POST':
+        
+        friend = User.objects.get(pk = request.POST['friend'])
+        request.user.friends.remove(friend)
+        
+        messages.info(request, 'Friend request deleted')
+        return redirect('/addfriend')
+    
+    else:
+        return HttpResponse("Something's fishy bruh!")

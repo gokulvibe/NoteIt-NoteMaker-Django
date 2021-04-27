@@ -72,3 +72,16 @@ def remove_friend(request):
     
     else:
         return HttpResponse("Something's fishy bruh!")
+    
+def view_friends(request):
+    
+    try:
+        searchable = request.GET['search']
+    except:
+        searchable = ''
+            
+    user = request.user
+    all_friends_searched = user.friends.all()
+    
+    return render(request, 'friends/viewfriends.html',
+                    context={'all_friends_searched' : all_friends_searched})

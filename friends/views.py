@@ -53,6 +53,13 @@ def accept_request(request):
     else:
         return HttpResponse("Something's fishy bruh!")
     
+def delete_request(request):
+    friend_request = FriendRequest.objects.get(id = request.POST['friend'])
+    friend_request.delete()
+        
+    messages.info(request, 'Friend request deleted')
+    return redirect('/display_friend_requests')
+    
     
 def remove_friend(request):
     if request.method == 'POST':

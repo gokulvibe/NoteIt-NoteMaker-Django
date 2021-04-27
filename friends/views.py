@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 from .models import FriendRequest, User
 from django.contrib import messages
+from django.http import HttpResponse
 # Create your views here.
     
     
@@ -37,3 +38,17 @@ def display_friend_requests(request):
     
     return render(request, 'friends/friend_requests.html', context = {'friend_requests' : friend_requests})
         
+def accept_request(request):
+    if request.method == 'POST':
+        friend_request = FriendRequest.objects.get(id = request.POST['friend'])
+        
+        friend_request.to_user.friends.add(friend_request.from_user)
+        friend_request.from_user.friends.add(friend_request.to_user)
+        
+        friend_request.delete()
+        
+        messages.info(request, 'Friend request accepted')
+        return redirect('/display_friend_requests')
+    
+    else:
+        return HttpResponse("Something's fishy bruh!")

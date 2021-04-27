@@ -19,6 +19,7 @@
                 </form>
 
                 <form action="/deleterequest" id="deleterequest" method="POST">
+                    {% csrf_token %}
                     <input type="hidden" name="friend" value="{{friend.pk}}">
                     <input type="submit" class="btn btn-danger btn-sm" value="Delete Request">
                 </form>

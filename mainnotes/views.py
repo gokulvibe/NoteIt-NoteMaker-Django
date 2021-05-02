@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Notes, Image, HiddenNotePassword
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse
+from docx import *
+from docx.shared import Inches
+from io import BytesIO
 # Create your views here.
 
 
@@ -159,4 +163,36 @@ def addHiddenNote(request):
     
     else:
         return render(request, "mainnotes/addhiddennote.html")
+    
+    
+def export_to_docx(request, pk):
+    note = Notes.objects.get(pk=pk)
+    
+    if note.owner == request.user:
+        document = Document()
+        docx_title = note.title + ".docx"
+        
+        document.add_heading(note.title, level=1)
+        document.add_paragraph()
+        document.add_paragraph(note.description)
+        
+        # Prepare document for download        
+        # -----------------------------
+        f = BytesIO()
+        document.save(f)
+        length = f.tell()
+        f.seek(0)
+        response = HttpResponse(
+            f.getvalue(),
+            content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        )
+        response['Content-Disposition'] = 'attachment; filename=' + docx_title
+        response['Content-Length'] = length
+        
+        return response
+    
+    
+    else:
+        return HttpResponse('You are not authorized for this')
+    
     

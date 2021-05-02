@@ -47,7 +47,12 @@
     </span>
     Save
   </button>
+
+  <a href="/export_to_docx/{{note.pk}}/" class="custombutton btn btn-primary btn-lg">
+    <span class="material-icons">done</span> Export to docx
+  </a>
   {% endif %}
+  
 
   <div id="ErrorMessage">
     {% for message in messages %}

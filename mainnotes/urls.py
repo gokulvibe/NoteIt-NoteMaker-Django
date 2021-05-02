@@ -12,4 +12,5 @@ urlpatterns = [
     path('emptytrash', views.empty_trash, name='empty_trash'),
     path('addhiddennote', views.addHiddenNote, name='addhiddennote'),
     path('deletenote', views.addHiddenNote, name='addhiddennote'),
+    path('export_to_docx/<int:pk>/', views.export_to_docx, name='export_to_docx'),
 ]

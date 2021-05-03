@@ -9,6 +9,8 @@ from docx.shared import Inches
 from io import BytesIO
 
 from reportlab.pdfgen import canvas
+
+from djqscsv import render_to_csv_response
 # Create your views here.
 
 
@@ -228,3 +230,9 @@ def export_to_pdf(request, pk):
     
     else:
         return HttpResponse('You are not authorized for this action!')
+    
+
+def export_to_csv(request):
+    notes = Notes.objects.filter(owner=request.user, hidden_note=False, trashed_note=False)
+    
+    return render_to_csv_response(notes)

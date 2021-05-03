@@ -14,4 +14,5 @@ urlpatterns = [
     path('deletenote', views.addHiddenNote, name='addhiddennote'),
     path('export_to_docx/<int:pk>/', views.export_to_docx, name='export_to_docx'),
     path('export_to_pdf/<int:pk>/', views.export_to_pdf, name='export_to_pdf'),
+    path('export_to_csv', views.export_to_csv, name='export_to_csv'),
 ]

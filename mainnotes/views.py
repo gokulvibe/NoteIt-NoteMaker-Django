@@ -3,9 +3,12 @@ from .models import Notes, Image, HiddenNotePassword
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
+
 from docx import *
 from docx.shared import Inches
 from io import BytesIO
+
+from reportlab.pdfgen import canvas
 # Create your views here.
 
 
@@ -196,3 +199,32 @@ def export_to_docx(request, pk):
         return HttpResponse('You are not authorized for this')
     
     
+def export_to_pdf(request, pk):
+    note = Notes.objects.get(pk=pk)
+    
+    if note.owner == request.user:
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'inline; filename=' + note.title + '.pdf'
+
+        buffer = BytesIO()
+        p = canvas.Canvas(buffer)
+
+        # Start writing the PDF here
+        p.setFont("Helvetica", 26)
+        p.drawString(50, 800, note.title)
+        p.line(50,790,500,790)
+        p.setFont("Helvetica", 14)
+        p.drawString(50, 760, note.description)
+        # End writing
+
+        p.showPage()
+        p.save()
+
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+
+        return response
+    
+    else:
+        return HttpResponse('You are not authorized for this action!')
